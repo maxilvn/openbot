@@ -10,17 +10,6 @@ export function SidebarSearch() {
   const { t } = useText();
   return (
     <div class="sidebar-search-wrap">
-      <Button
-        variant="ghost"
-        type="button"
-        class="sidebar-icon-button sidebar-search-trigger no-drag"
-        aria-label={t("conversation.globalSearch.title")}
-        title={t("conversation.globalSearch.title")}
-        aria-haspopup="dialog"
-        onClick={props.onOpenSearch}
-      >
-        <SearchIcon />
-      </Button>
       <Show when={props.onTogglePageRail && !props.compact}>
         <Button
           variant="ghost"
@@ -35,6 +24,17 @@ export function SidebarSearch() {
           <PanelLeft aria-hidden="true" />
         </Button>
       </Show>
+      <Button
+        variant="ghost"
+        type="button"
+        class="sidebar-icon-button sidebar-search-trigger no-drag"
+        aria-label={t("conversation.globalSearch.title")}
+        title={t("conversation.globalSearch.title")}
+        aria-haspopup="dialog"
+        onClick={props.onOpenSearch}
+      >
+        <SearchIcon />
+      </Button>
       <SidebarFilterMenu />
       <Show when={props.createSupported !== false || props.onCreateChannel || layoutMutable()}>
         <DropdownMenu.Root placement="bottom-end" gutter={4}>

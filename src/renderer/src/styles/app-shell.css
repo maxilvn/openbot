@@ -1330,6 +1330,38 @@ textarea {
   padding: 8px 12px 6px;
 }
 
+/* Leave room for the native window buttons and keep navigation on the trailing edge. */
+.app-frame-platform-darwin:not(.web-app-frame) .sidebar:not(.sidebar-compact) {
+  position: relative;
+}
+
+@container (min-width: 190px) {
+  .app-frame-platform-darwin:not(.web-app-frame) .sidebar:not(.sidebar-compact) .sidebar-topbar {
+    justify-content: flex-end;
+  }
+
+  .app-frame-platform-darwin:not(.web-app-frame) .sidebar:not(.sidebar-compact) .sidebar-topbar-actions {
+    gap: 0;
+  }
+
+  .app-frame-platform-darwin:not(.web-app-frame) .sidebar:not(.sidebar-compact) .sidebar-search-wrap {
+    position: absolute;
+    z-index: 3;
+    inset-block-start: 0;
+    inset-inline-start: 78px;
+    height: var(--left-header-height);
+    gap: 0;
+    padding: 0;
+  }
+}
+
+@container (190px <= width < 280px) {
+  .app-frame-platform-darwin:not(.web-app-frame) .sidebar:not(.sidebar-compact) .sidebar-topbar {
+    height: calc(var(--left-header-height) + 28px);
+    align-items: flex-end;
+  }
+}
+
 .sidebar-search-trigger {
   width: 28px;
   height: 28px;
