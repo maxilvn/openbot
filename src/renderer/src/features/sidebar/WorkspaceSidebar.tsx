@@ -7,11 +7,9 @@ import { Sidebar } from "@openbot/ui/features/sidebar/Sidebar";
 import { SidebarCommunityCard } from "@openbot/ui/features/sidebar/SidebarCommunityCard";
 import { SidebarMobileAppCard } from "@openbot/ui/features/sidebar/SidebarMobileAppCard";
 import { sidebarChannelWaits } from "@openbot/ui/features/sidebar/sidebar-agent-states";
-import { teamMemberName } from "@openbot/ui/features/team/TeamPersonAvatar";
 import { useText } from "@openbot/ui/text";
 import { createEffect, createMemo, createSignal, onSettled, Show } from "solid-js";
 import { appPort } from "../../app-port";
-import { type ChatHistoryEntry, chatHistoryKeys } from "../../chat-history";
 import { useLayout } from "../../layout";
 import { DirectConversation } from "../../lazy-views";
 import { useNavigation } from "../../navigation";
@@ -96,7 +94,7 @@ export function WorkspaceSidebar(props: { peopleEnabled: boolean }) {
   const { agentUnreadReplies, markAgentChatRead, markAgentChatUnread, markAllAgentMessagesRead } = useConversation();
   const { directPeople, teamPresence } = usePresence();
   const { activeDirectMember, activeDirectMemberId, directThreads } = useDirectMessages();
-  const { selectAgent, selectDirectMember, setGlobalSearchVisibility, chatHistory } = useNavigation();
+  const { selectAgent, selectDirectMember, setGlobalSearchVisibility } = useNavigation();
   const agentTasks = useAgentTasks();
   const agentThreads = useAgentThreads();
   const unreadAgentIds = createMemo(
@@ -108,20 +106,6 @@ export function WorkspaceSidebar(props: { peopleEnabled: boolean }) {
           if (selectAgent(agentId)) agentThreads.startNew(agentId);
         }
       : undefined;
-  const backTarget = (): { name: string } | null => {
-    const pageBack = chatHistory.pageBack();
-    if (pageBack) return { name: pageBack.name };
-    return chatName(chatHistory.chatUnderPage() ?? chatHistory.previous());
-  };
-  const chatName = (entry: ChatHistoryEntry | undefined): { name: string } | null => {
-    if (!entry) return null;
-    if (entry.kind === "agent") return { name: agentList().find((agent) => agent.id === entry.id)?.name ?? "" };
-    if (entry.kind === "channel") {
-      return { name: channels.state.channels.find((channel) => channel.id === entry.id)?.name ?? "" };
-    }
-    const member = directPeople().find((person) => person.id === entry.id);
-    return { name: member ? teamMemberName(member) : "" };
-  };
   const {
     sidebarLayout,
     collapsedSidebarSectionIds,
@@ -204,13 +188,6 @@ export function WorkspaceSidebar(props: { peopleEnabled: boolean }) {
         onOpenServerSettings={(trigger) => {
           const server = activeServer();
           if (server) openServerSettings(server.id, trigger);
-        }}
-        chatHistory={{
-          back: backTarget(),
-          forward: chatName(chatHistory.next()),
-          keys: chatHistoryKeys(platform.appInfo()?.platform === "darwin"),
-          onBack: chatHistory.goBack,
-          onForward: chatHistory.goForward,
         }}
         serverUpdate={(() => {
           const server = activeServer();
