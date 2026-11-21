@@ -1,6 +1,7 @@
 import type { CentralAuthUser } from "@openbot/contracts/ipc";
 import { AGENT_TASKS_CAPABILITY } from "@openbot/contracts/team-protocol/agent-tasks-v1";
 import { CRM_CAPABILITY } from "@openbot/contracts/team-protocol/crm-v1";
+import { Button, PanelLeft } from "@openbot/ui";
 import {
   ConversationLoadNotice,
   ServerConnectionNotice,
@@ -319,6 +320,20 @@ export function WorkspaceShell(props: {
     <ConnectorsProvider>
       <WindowBackdrop />
       <div class="app-window">
+        <Show when={!chatWindow && !remoteDesktopWorkspaceVisible() && platform.appInfo()?.platform === "darwin"}>
+          <Button
+            variant="ghost"
+            type="button"
+            class="sidebar-icon-button page-rail-global-toggle no-drag"
+            aria-label={layout.pageRailCollapsed() ? t("sidebar.topbar.expand") : t("sidebar.topbar.collapse")}
+            title={layout.pageRailCollapsed() ? t("sidebar.topbar.expand") : t("sidebar.topbar.collapse")}
+            aria-controls="window-rail"
+            aria-expanded={layout.pageRailCollapsed() ? "false" : "true"}
+            onClick={() => layout.setPageRailCollapsed(!layout.pageRailCollapsed())}
+          >
+            <PanelLeft aria-hidden="true" />
+          </Button>
+        </Show>
         <WorkspacePageRail hidden={chatWindow || remoteDesktopWorkspaceVisible() || layout.pageRailCollapsed()} />
         <WorkspaceFrame
           class={chatWindow ? "app-frame-chat-window" : windowAgentDock() ? "app-frame-agent-dock" : undefined}

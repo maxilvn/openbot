@@ -1,4 +1,4 @@
-import { Bot, Button, DropdownMenu, FolderPlus, Hash, PanelLeft } from "@openbot/ui";
+import { Bot, Button, DropdownMenu, FolderPlus, Hash } from "@openbot/ui";
 import { Show } from "solid-js";
 import { useText } from "../../text";
 import { SidebarFilterMenu } from "./SidebarFilterMenu";
@@ -10,20 +10,6 @@ export function SidebarSearch() {
   const { t } = useText();
   return (
     <div class="sidebar-search-wrap">
-      <Show when={props.onTogglePageRail && !props.compact}>
-        <Button
-          variant="ghost"
-          type="button"
-          class="sidebar-icon-button sidebar-rail-toggle no-drag"
-          aria-label={props.pageRailCollapsed ? t("sidebar.topbar.expand") : t("sidebar.topbar.collapse")}
-          title={props.pageRailCollapsed ? t("sidebar.topbar.expand") : t("sidebar.topbar.collapse")}
-          aria-controls="window-rail"
-          aria-expanded={props.pageRailCollapsed ? "false" : "true"}
-          onClick={props.onTogglePageRail}
-        >
-          <PanelLeft aria-hidden="true" />
-        </Button>
-      </Show>
       <Button
         variant="ghost"
         type="button"

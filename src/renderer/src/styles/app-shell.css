@@ -1344,7 +1344,7 @@ textarea {
     position: absolute;
     z-index: 3;
     inset-block-start: 0;
-    inset-inline-start: 78px;
+    inset-inline-start: 112px;
     height: var(--left-header-height);
     gap: 0;
     padding: 0;
@@ -1356,10 +1356,6 @@ textarea {
   height: 28px;
   flex: 0 0 28px;
   cursor: pointer;
-}
-
-.sidebar-rail-toggle {
-  flex: 0 0 28px;
 }
 
 .sidebar-compact .sidebar-search-trigger {
@@ -2064,7 +2060,8 @@ textarea {
 }
 
 .sidebar-pinned-group {
-  padding: 4px 0 2px;
+  border-bottom: 1px solid var(--openbot-border);
+  padding: 4px 0 6px;
 }
 
 .sidebar-pinned-list {
@@ -2888,7 +2885,7 @@ textarea {
   min-width: 0;
   overflow: hidden;
   color: var(--openbot-text-primary);
-  font-size: var(--openbot-text-lg);
+  font-size: var(--openbot-text-md);
   line-height: 20px;
   font-weight: 500;
   text-overflow: ellipsis;
@@ -2963,7 +2960,7 @@ textarea {
   margin-top: 0;
   overflow: hidden;
   color: var(--openbot-text-muted);
-  font-size: var(--openbot-text-md);
+  font-size: var(--openbot-text-sm);
   line-height: 18px;
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -3285,7 +3282,15 @@ textarea {
 }
 
 .sidebar-compact .sidebar-toggle-button {
+  opacity: 0;
+  pointer-events: none;
   transform: translateX(13px);
+  transition: opacity var(--openbot-duration-fast) ease;
+}
+
+.sidebar-compact .sidebar-topbar:is(:hover, :focus-within) .sidebar-toggle-button {
+  opacity: 1;
+  pointer-events: auto;
 }
 
 .sidebar-compact .sidebar-toggle-button:active {
@@ -3293,7 +3298,7 @@ textarea {
 }
 
 .sidebar-compact .sidebar-search-wrap {
-  padding-inline: 12px;
+  display: none;
 }
 
 .sidebar-compact .agent-list {
