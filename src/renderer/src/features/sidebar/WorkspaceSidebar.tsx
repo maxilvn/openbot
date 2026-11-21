@@ -38,7 +38,6 @@ import { usePresence } from "../team/team-context";
 import { SidebarUpdateIsland } from "../updates/SidebarUpdateIsland";
 import { useWindowPage } from "../window/window-page-context";
 import { createCommunityCardVisibility } from "./community-card";
-import { DevWorktreeLabel } from "./DevWorktreeLabel";
 import { createSidebarAlertCards, SidebarAlertCards } from "./SidebarAlertCards";
 import { ServerUpgradeOffer } from "./server-upgrade-offer";
 import { useSidebar } from "./sidebar-context";
@@ -218,7 +217,7 @@ export function WorkspaceSidebar(props: { peopleEnabled: boolean }) {
           const badge = server ? serverUpdateBadge(server.id) : null;
           return server && badge ? { ...badge, onOpen: () => void showServerUpdate(server.id) } : undefined;
         })()}
-        topbarDetail={<DevWorktreeLabel />}
+        hideTopbarServer
         serverMenu={
           platform.appInfo()
             ? {

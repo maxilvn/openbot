@@ -34,28 +34,30 @@ export function SidebarTopbar() {
   );
   return (
     <div class="window-drag sidebar-topbar">
-      <Show
-        when={props.serverMenu}
-        fallback={
-          <Button
-            variant="ghost"
-            size="sm"
-            type="button"
-            class="sidebar-server-name no-drag"
-            aria-label={t("sidebar.topbar.openSettings", { name: props.serverName })}
-            aria-hidden={props.compact ? "true" : undefined}
-            tabindex={props.compact ? -1 : 0}
-            disabled={!props.onOpenServerSettings}
-            title={props.serverName}
-            onClick={(event) => props.onOpenServerSettings?.(event.currentTarget)}
-          >
-            <span class="sidebar-server-name-label" dir="auto">
-              {props.serverName}
-            </span>
-          </Button>
-        }
-      >
-        {(serverMenu) => <ServerMenu {...serverMenu()} serverName={props.serverName} compact={props.compact} />}
+      <Show when={!props.hideTopbarServer}>
+        <Show
+          when={props.serverMenu}
+          fallback={
+            <Button
+              variant="ghost"
+              size="sm"
+              type="button"
+              class="sidebar-server-name no-drag"
+              aria-label={t("sidebar.topbar.openSettings", { name: props.serverName })}
+              aria-hidden={props.compact ? "true" : undefined}
+              tabindex={props.compact ? -1 : 0}
+              disabled={!props.onOpenServerSettings}
+              title={props.serverName}
+              onClick={(event) => props.onOpenServerSettings?.(event.currentTarget)}
+            >
+              <span class="sidebar-server-name-label" dir="auto">
+                {props.serverName}
+              </span>
+            </Button>
+          }
+        >
+          {(serverMenu) => <ServerMenu {...serverMenu()} serverName={props.serverName} compact={props.compact} />}
+        </Show>
       </Show>
       <div class="sidebar-topbar-actions">
         <Show when={props.chatHistory}>
