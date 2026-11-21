@@ -2435,6 +2435,11 @@ textarea {
   pointer-events: none;
 }
 
+/* Plush eye textures sit in nested SVGs; the body image is a separate layer. */
+[data-dark-eyes] .bloub-avatar-svg svg[preserveAspectRatio="none"] > image[width="1"][height="1"] {
+  filter: brightness(0);
+}
+
 .bloub-avatar-svg > g:nth-of-type(2) > path:first-child {
   stroke: var(--agent-avatar-outline, transparent);
   stroke-width: calc(var(--agent-avatar-outline-width, 1.5px) * 2);
