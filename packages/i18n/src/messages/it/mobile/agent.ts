@@ -51,6 +51,7 @@ export const messages = {
   "mobile.agent.appearance.hue.brown": "Marrone",
   "mobile.agent.appearance.hue.sand": "Sabbia",
   "mobile.agent.appearance.hue.grey": "Grigio",
+  "mobile.agent.appearance.hue.white": "Bianco",
   "mobile.agent.menu.deleteFailed": "Impossibile eliminare l'agente",
   "mobile.agent.menu.duplicateFailed": "Impossibile duplicare l'agente",
   "mobile.agent.menu.hideFailed": "Impossibile nascondere l'agente",

@@ -96,6 +96,7 @@ export const messages = {
   "agent.color.violet": "紫罗兰色",
   "agent.color.magenta": "洋红色",
   "agent.color.grey": "灰色",
+  "agent.color.white": "白色",
   "agent.color.pink": "粉色",
   "agent.color.sky": "天蓝色",
   "agent.color.navy": "海军蓝",

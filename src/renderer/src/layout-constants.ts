@@ -1,6 +1,7 @@
 export const LEFT_PANEL_STORAGE_KEY = "openbot:left-panel-width";
 export const LEFT_PANEL_COLLAPSED_STORAGE_KEY = "openbot:left-panel-collapsed";
 export const LEFT_PANEL_CLOSED_STORAGE_KEY = "openbot:left-panel-closed";
+export const PAGE_RAIL_COLLAPSED_STORAGE_KEY = "openbot:page-rail-collapsed";
 export const SERVER_VIEW_STORAGE_KEY = "openbot:server-view";
 export const SIDEBAR_CHAT_ORDER_STORAGE_KEY = "openbot:sidebar-chat-order";
 export const RAIL_PINS_STORAGE_KEY = "openbot:rail-pins";

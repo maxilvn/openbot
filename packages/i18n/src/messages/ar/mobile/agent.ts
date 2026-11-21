@@ -50,6 +50,7 @@ export const messages = {
   "mobile.agent.appearance.hue.brown": "بني",
   "mobile.agent.appearance.hue.sand": "رملي",
   "mobile.agent.appearance.hue.grey": "رمادي",
+  "mobile.agent.appearance.hue.white": "أبيض",
   "mobile.agent.menu.deleteFailed": "تعذّر حذف الوكيل",
   "mobile.agent.menu.duplicateFailed": "تعذّر تكرار الوكيل",
   "mobile.agent.menu.hideFailed": "تعذّر إخفاء الوكيل",

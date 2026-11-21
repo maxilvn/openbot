@@ -102,6 +102,7 @@ export const messages = {
   "agent.color.violet": "보라",
   "agent.color.magenta": "자홍",
   "agent.color.grey": "회색",
+  "agent.color.white": "흰색",
   "agent.color.pink": "분홍",
   "agent.color.sky": "하늘색",
   "agent.color.navy": "네이비",

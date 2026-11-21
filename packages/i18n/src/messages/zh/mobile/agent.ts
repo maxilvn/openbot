@@ -50,6 +50,7 @@ export const messages = {
   "mobile.agent.appearance.hue.brown": "棕色",
   "mobile.agent.appearance.hue.sand": "沙色",
   "mobile.agent.appearance.hue.grey": "灰色",
+  "mobile.agent.appearance.hue.white": "白色",
   "mobile.agent.menu.deleteFailed": "无法删除助手",
   "mobile.agent.menu.duplicateFailed": "无法复制助手",
   "mobile.agent.menu.hideFailed": "无法隐藏助手",

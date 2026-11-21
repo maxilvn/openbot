@@ -51,6 +51,7 @@ export const messages = {
   "mobile.agent.appearance.hue.brown": "茶色",
   "mobile.agent.appearance.hue.sand": "サンド",
   "mobile.agent.appearance.hue.grey": "グレー",
+  "mobile.agent.appearance.hue.white": "白",
   "mobile.agent.menu.deleteFailed": "エージェントを削除できませんでした",
   "mobile.agent.menu.duplicateFailed": "エージェントを複製できませんでした",
   "mobile.agent.menu.hideFailed": "エージェントを非表示にできませんでした",

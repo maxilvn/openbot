@@ -9,7 +9,7 @@ import { SidebarAgentContextMenu } from "./SidebarAgentContextMenu";
 import { SidebarAgentIndicator, SidebarWaitChip, SidebarWaitTooltip } from "./SidebarAgentIndicator";
 import { SidebarAgentThreads } from "./SidebarAgentThreads";
 import { SidebarNameTooltip } from "./SidebarNameTooltip";
-import { sidebarAgentStateLabel, sidebarMessageTime, sidebarUsageResetTime } from "./sidebar-filtering";
+import { sidebarAgentStateLabel, sidebarUsageResetTime } from "./sidebar-filtering";
 import { useSidebarScope } from "./sidebar-scope";
 
 export function SidebarAgentRow(rowProps: { agent: AgentProfile; waiting?: boolean; userHidden?: boolean }) {
@@ -117,18 +117,7 @@ export function SidebarAgentRow(rowProps: { agent: AgentProfile; waiting?: boole
             <Show
               when={wait()}
               fallback={
-                <Show
-                  when={limit()}
-                  fallback={
-                    <Show when={!paused()}>
-                      <span class="agent-row-time">
-                        {rowProps.agent.updatedAt
-                          ? sidebarMessageTime(rowProps.agent.updatedAt, format)
-                          : rowProps.agent.time}
-                      </span>
-                    </Show>
-                  }
-                >
+                <Show when={limit()}>
                   {(current) => (
                     <span class="agent-row-wait-chip">
                       <Clock3 aria-hidden="true" />

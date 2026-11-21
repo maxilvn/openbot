@@ -1,4 +1,4 @@
-import { Bot, Button, DropdownMenu, FolderPlus, Hash } from "@openbot/ui";
+import { Bot, Button, DropdownMenu, FolderPlus, Hash, PanelLeft } from "@openbot/ui";
 import { Show } from "solid-js";
 import { useText } from "../../text";
 import { SidebarFilterMenu } from "./SidebarFilterMenu";
@@ -13,16 +13,28 @@ export function SidebarSearch() {
       <Button
         variant="ghost"
         type="button"
-        class="search-field sidebar-search-trigger"
+        class="sidebar-icon-button sidebar-search-trigger no-drag"
         aria-label={t("conversation.globalSearch.title")}
+        title={t("conversation.globalSearch.title")}
         aria-haspopup="dialog"
-        aria-hidden={props.compact ? "true" : undefined}
-        tabindex={props.compact ? -1 : 0}
         onClick={props.onOpenSearch}
       >
         <SearchIcon />
-        <span class="sidebar-search-placeholder">{t("common.search")}</span>
       </Button>
+      <Show when={props.onTogglePageRail && !props.compact}>
+        <Button
+          variant="ghost"
+          type="button"
+          class="sidebar-icon-button sidebar-rail-toggle no-drag"
+          aria-label={props.pageRailCollapsed ? t("sidebar.topbar.expand") : t("sidebar.topbar.collapse")}
+          title={props.pageRailCollapsed ? t("sidebar.topbar.expand") : t("sidebar.topbar.collapse")}
+          aria-controls="window-rail"
+          aria-expanded={props.pageRailCollapsed ? "false" : "true"}
+          onClick={props.onTogglePageRail}
+        >
+          <PanelLeft aria-hidden="true" />
+        </Button>
+      </Show>
       <SidebarFilterMenu />
       <Show when={props.createSupported !== false || props.onCreateChannel || layoutMutable()}>
         <DropdownMenu.Root placement="bottom-end" gutter={4}>
@@ -58,18 +70,6 @@ export function SidebarSearch() {
           </DropdownMenu.Portal>
         </DropdownMenu.Root>
       </Show>
-      <Button
-        variant="ghost"
-        type="button"
-        class="sidebar-compact-search"
-        aria-label={t("conversation.globalSearch.title")}
-        aria-haspopup="dialog"
-        aria-hidden={props.compact ? undefined : "true"}
-        tabindex={props.compact ? 0 : -1}
-        onClick={props.onOpenSearch}
-      >
-        <SearchIcon />
-      </Button>
     </div>
   );
 }

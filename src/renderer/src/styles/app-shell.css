@@ -896,10 +896,6 @@ textarea {
     padding-top: 11px;
   }
 
-  .app-frame-edge .sidebar-compact-search {
-    top: 11px;
-  }
-
   .app-frame-edge .conversation-panel,
   .app-frame-edge .direct-conversation {
     isolation: isolate;
@@ -1335,52 +1331,42 @@ textarea {
 }
 
 .sidebar-search-trigger {
-  min-width: 0;
-  flex: 1 1 auto;
-  justify-content: flex-start;
-  font-size: var(--openbot-text-md);
-  font-weight: var(--openbot-weight-regular);
-  line-height: 18px;
+  width: 28px;
+  height: 28px;
+  flex: 0 0 28px;
   cursor: pointer;
 }
 
-.sidebar-search-trigger:hover:not(:disabled) {
-  border-color: var(--openbot-text-dim);
-  background: var(--openbot-bg-surface);
-  color: var(--openbot-text-dim);
+.sidebar-rail-toggle {
+  flex: 0 0 28px;
 }
 
-.sidebar-search-placeholder {
-  color: var(--openbot-text-muted);
-}
-
-.sidebar-compact-search {
+.sidebar-compact .sidebar-search-trigger {
   position: absolute;
   inset: 8px 12px 6px;
+  z-index: 3;
   display: grid;
   height: 32px;
+  width: auto;
+  flex: none;
   place-items: center;
   border: 0;
   border-radius: var(--openbot-radius-sm);
   background: transparent;
   color: var(--openbot-text-muted);
-  opacity: 0;
-  pointer-events: none;
-  transform: translateX(6px) scale(0.96);
   cursor: pointer;
   transition:
     background-color var(--openbot-duration-hover) ease,
     color var(--openbot-duration-hover) ease,
-    opacity var(--openbot-duration-fast) ease,
     transform var(--openbot-duration-slow) cubic-bezier(0.32, 0.72, 0, 1);
 }
 
-.sidebar-compact-search:hover {
+.sidebar-compact .sidebar-search-trigger:hover {
   background: var(--openbot-hover);
   color: var(--openbot-text-primary);
 }
 
-.sidebar-compact-search:active {
+.sidebar-compact .sidebar-search-trigger:active {
   transform: scale(0.96);
 }
 
@@ -3284,19 +3270,6 @@ textarea {
   padding-inline: 12px;
 }
 
-.sidebar-compact .search-field {
-  opacity: 0;
-  pointer-events: none;
-  transform: translateX(-8px);
-}
-
-.sidebar-compact .sidebar-compact-search {
-  opacity: 1;
-  pointer-events: auto;
-  transform: translateX(0) scale(1);
-  transition-delay: 55ms;
-}
-
 .sidebar-compact .agent-list {
   --agent-list-fade-size: 32px;
 
@@ -3365,10 +3338,6 @@ textarea {
 
 .sidebar-compact .sidebar-toggle-button:dir(rtl):active {
   transform: translateX(-13px) scale(0.96);
-}
-
-.sidebar-compact .search-field:dir(rtl) {
-  transform: translateX(8px);
 }
 
 .sidebar-compact .agent-row-avatar:dir(rtl) {

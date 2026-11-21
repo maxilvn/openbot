@@ -58,6 +58,7 @@ export const AVATAR_COLOR_PRESETS = {
   brown: "#8b5e3c",
   sand: "#d6b98c",
   grey: "#a3a3a3",
+  white: "#ffffff",
 } as const satisfies Record<string, AvatarColor>;
 export type AvatarColorPresetId = keyof typeof AVATAR_COLOR_PRESETS;
 
@@ -92,6 +93,7 @@ export const AVATAR_COLOR_CHOICES: readonly AvatarColorChoice[] = [
   presetChoice("brown"),
   presetChoice("sand"),
   presetChoice("grey"),
+  presetChoice("white"),
 ];
 
 export function isAvatarColorChoice(

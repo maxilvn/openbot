@@ -55,6 +55,7 @@ const PRESET_LABELS = {
   brown: "mobile.agent.appearance.hue.brown",
   sand: "mobile.agent.appearance.hue.sand",
   grey: "mobile.agent.appearance.hue.grey",
+  white: "mobile.agent.appearance.hue.white",
 } as const satisfies Record<AvatarColorPresetId, MobileTextKey>;
 
 export function avatarColorChoiceLabel(choice: AvatarColorChoice): MobileTextKey {

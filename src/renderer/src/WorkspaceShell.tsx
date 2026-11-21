@@ -319,7 +319,7 @@ export function WorkspaceShell(props: {
     <ConnectorsProvider>
       <WindowBackdrop />
       <div class="app-window">
-        <WorkspacePageRail hidden={chatWindow || remoteDesktopWorkspaceVisible()} />
+        <WorkspacePageRail hidden={chatWindow || remoteDesktopWorkspaceVisible() || layout.pageRailCollapsed()} />
         <WorkspaceFrame
           class={chatWindow ? "app-frame-chat-window" : windowAgentDock() ? "app-frame-agent-dock" : undefined}
           compact={layout.leftPanelCompact()}

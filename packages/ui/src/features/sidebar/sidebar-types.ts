@@ -110,6 +110,8 @@ export interface SidebarProps {
   onOpenAgentWindow?: ((agentId: string) => void) | undefined;
   windowAgentIds?: ReadonlySet<string> | undefined;
   compact: boolean;
+  pageRailCollapsed?: boolean | undefined;
+  onTogglePageRail?: (() => void) | undefined;
   footer?: JSX.Element;
   onExpand: () => void;
   onCollapse?: (() => void) | undefined;

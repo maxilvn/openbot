@@ -49,6 +49,7 @@ export const messages = defineMessages("mobile.agent", {
   "mobile.agent.appearance.hue.brown": "Brown",
   "mobile.agent.appearance.hue.sand": "Sand",
   "mobile.agent.appearance.hue.grey": "Gray",
+  "mobile.agent.appearance.hue.white": "White",
   "mobile.agent.menu.deleteFailed": "Could not delete agent",
   "mobile.agent.menu.duplicateFailed": "Could not duplicate agent",
   "mobile.agent.menu.hideFailed": "Could not hide agent",

@@ -50,6 +50,7 @@ export const messages = {
   "mobile.agent.appearance.hue.brown": "חום",
   "mobile.agent.appearance.hue.sand": "חול",
   "mobile.agent.appearance.hue.grey": "אפור",
+  "mobile.agent.appearance.hue.white": "לבן",
   "mobile.agent.menu.deleteFailed": "לא ניתן למחוק את הסוכן",
   "mobile.agent.menu.duplicateFailed": "לא ניתן לשכפל את הסוכן",
   "mobile.agent.menu.hideFailed": "לא ניתן להסתיר את הסוכן",

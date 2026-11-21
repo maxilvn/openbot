@@ -50,6 +50,7 @@ export const messages = {
   "mobile.agent.appearance.hue.brown": "Kahverengi",
   "mobile.agent.appearance.hue.sand": "Kum",
   "mobile.agent.appearance.hue.grey": "Gri",
+  "mobile.agent.appearance.hue.white": "Beyaz",
   "mobile.agent.menu.deleteFailed": "Ajan silinemedi",
   "mobile.agent.menu.duplicateFailed": "Ajan çoğaltılamadı",
   "mobile.agent.menu.hideFailed": "Ajan gizlenemedi",

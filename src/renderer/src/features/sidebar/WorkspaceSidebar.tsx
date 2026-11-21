@@ -299,7 +299,8 @@ export function WorkspaceSidebar(props: { peopleEnabled: boolean }) {
         windowAgentIds={windowAgentIds()}
         compact={layout.leftPanelCompact()}
         onExpand={layout.expandSidebar}
-        onCollapse={() => layout.setSidebarClosed(true)}
+        pageRailCollapsed={layout.pageRailCollapsed()}
+        onTogglePageRail={() => layout.setPageRailCollapsed(!layout.pageRailCollapsed())}
         onOpenSearch={() => setGlobalSearchVisibility(true)}
         footer={
           <>
