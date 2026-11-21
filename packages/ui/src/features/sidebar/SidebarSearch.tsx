@@ -13,15 +13,13 @@ export function SidebarSearch() {
       <Button
         variant="ghost"
         type="button"
-        class="search-field sidebar-search-trigger"
+        class="sidebar-icon-button sidebar-search-trigger no-drag"
         aria-label={t("conversation.globalSearch.title")}
+        title={t("conversation.globalSearch.title")}
         aria-haspopup="dialog"
-        aria-hidden={props.compact ? "true" : undefined}
-        tabindex={props.compact ? -1 : 0}
         onClick={props.onOpenSearch}
       >
         <SearchIcon />
-        <span class="sidebar-search-placeholder">{t("common.search")}</span>
       </Button>
       <SidebarFilterMenu />
       <Show when={props.createSupported !== false || props.onCreateChannel || layoutMutable()}>
@@ -58,18 +56,6 @@ export function SidebarSearch() {
           </DropdownMenu.Portal>
         </DropdownMenu.Root>
       </Show>
-      <Button
-        variant="ghost"
-        type="button"
-        class="sidebar-compact-search"
-        aria-label={t("conversation.globalSearch.title")}
-        aria-haspopup="dialog"
-        aria-hidden={props.compact ? undefined : "true"}
-        tabindex={props.compact ? 0 : -1}
-        onClick={props.onOpenSearch}
-      >
-        <SearchIcon />
-      </Button>
     </div>
   );
 }

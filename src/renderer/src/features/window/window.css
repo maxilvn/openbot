@@ -10,6 +10,13 @@
   background: var(--window-frame);
 }
 
+.page-rail-global-toggle {
+  position: fixed;
+  z-index: var(--openbot-layer-tooltip);
+  inset-block-start: var(--openbot-space-1);
+  inset-inline-start: 78px;
+}
+
 .app-window > .window-rail[hidden] {
   display: none;
 }

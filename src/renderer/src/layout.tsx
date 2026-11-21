@@ -15,6 +15,7 @@ import {
   LEFT_PANEL_STORAGE_KEY,
   MAC_SERVER_RAIL_WIDTH,
   NARROW_SERVER_RAIL_WIDTH,
+  PAGE_RAIL_COLLAPSED_STORAGE_KEY,
   RAIL_PINS_STORAGE_KEY,
   SERVER_RAIL_WIDTH,
   SERVER_VIEW_STORAGE_KEY,
@@ -81,6 +82,9 @@ const Layout = createSimpleContext({
     const [leftPanelCollapsed, setLeftPanelCollapsed] = createSignal(
       window.localStorage.getItem(LEFT_PANEL_COLLAPSED_STORAGE_KEY) === "true",
     );
+    const [pageRailCollapsed, setPageRailCollapsedSignal] = createSignal(
+      window.localStorage.getItem(PAGE_RAIL_COLLAPSED_STORAGE_KEY) === "true",
+    );
     const [serverView, setServerViewSignal] = createSignal<ServerView>(
       window.localStorage.getItem(SERVER_VIEW_STORAGE_KEY) === "rail" ? "rail" : "menu",
     );
@@ -137,6 +141,11 @@ const Layout = createSimpleContext({
       window.localStorage.setItem(LEFT_PANEL_CLOSED_STORAGE_KEY, String(closed));
     }
 
+    function setPageRailCollapsed(collapsed: boolean): void {
+      setPageRailCollapsedSignal(collapsed);
+      window.localStorage.setItem(PAGE_RAIL_COLLAPSED_STORAGE_KEY, String(collapsed));
+    }
+
     function setServerView(view: ServerView): void {
       setServerViewSignal(view);
       window.localStorage.setItem(SERVER_VIEW_STORAGE_KEY, view);
@@ -172,6 +181,8 @@ const Layout = createSimpleContext({
       sidebarClosed,
       setSidebarClosed,
       expandSidebar,
+      pageRailCollapsed,
+      setPageRailCollapsed,
       serverView,
       setServerView,
       serverRailVisible,

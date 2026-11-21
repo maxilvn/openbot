@@ -607,6 +607,7 @@ export function PageRail(props: PageRailProps) {
   });
   return (
     <nav
+      id="window-rail"
       class="window-rail"
       aria-label={t("app.rail.label")}
       hidden={props.hidden}

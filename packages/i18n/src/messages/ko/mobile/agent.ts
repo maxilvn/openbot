@@ -50,6 +50,7 @@ export const messages = {
   "mobile.agent.appearance.hue.brown": "갈색",
   "mobile.agent.appearance.hue.sand": "모래색",
   "mobile.agent.appearance.hue.grey": "회색",
+  "mobile.agent.appearance.hue.white": "흰색",
   "mobile.agent.menu.deleteFailed": "에이전트를 삭제할 수 없어요",
   "mobile.agent.menu.duplicateFailed": "에이전트를 복제할 수 없어요",
   "mobile.agent.menu.hideFailed": "에이전트를 숨길 수 없어요",

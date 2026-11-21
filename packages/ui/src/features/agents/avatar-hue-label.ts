@@ -23,6 +23,7 @@ const AVATAR_PRESET_LABEL = {
   brown: "agent.color.brown",
   sand: "agent.color.sand",
   grey: "agent.color.grey",
+  white: "agent.color.white",
 } as const satisfies Record<AvatarColorPresetId, AppTextKey>;
 
 export function avatarColorChoiceLabel(choice: AvatarColorChoice): AppTextKey {

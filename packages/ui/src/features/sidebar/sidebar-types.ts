@@ -55,6 +55,7 @@ export interface SidebarProps {
   onRestoreChannel?: ((channelId: string) => void) | undefined;
   serverName: string;
   onOpenServerSettings?: ((trigger: HTMLElement) => void) | undefined;
+  hideTopbarServer?: boolean | undefined;
   serverMenu?: Omit<ServerMenuProps, "serverName" | "compact"> | undefined;
   chatHistory?: SidebarChatHistory | undefined;
   serverUpdate?: { version: string; running: boolean; onOpen: () => void } | undefined;

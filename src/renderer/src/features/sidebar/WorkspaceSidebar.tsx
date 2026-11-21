@@ -7,11 +7,9 @@ import { Sidebar } from "@openbot/ui/features/sidebar/Sidebar";
 import { SidebarCommunityCard } from "@openbot/ui/features/sidebar/SidebarCommunityCard";
 import { SidebarMobileAppCard } from "@openbot/ui/features/sidebar/SidebarMobileAppCard";
 import { sidebarChannelWaits } from "@openbot/ui/features/sidebar/sidebar-agent-states";
-import { teamMemberName } from "@openbot/ui/features/team/TeamPersonAvatar";
 import { useText } from "@openbot/ui/text";
 import { createEffect, createMemo, createSignal, onSettled, Show } from "solid-js";
 import { appPort } from "../../app-port";
-import { type ChatHistoryEntry, chatHistoryKeys } from "../../chat-history";
 import { useLayout } from "../../layout";
 import { DirectConversation } from "../../lazy-views";
 import { useNavigation } from "../../navigation";
@@ -38,7 +36,6 @@ import { usePresence } from "../team/team-context";
 import { SidebarUpdateIsland } from "../updates/SidebarUpdateIsland";
 import { useWindowPage } from "../window/window-page-context";
 import { createCommunityCardVisibility } from "./community-card";
-import { DevWorktreeLabel } from "./DevWorktreeLabel";
 import { createSidebarAlertCards, SidebarAlertCards } from "./SidebarAlertCards";
 import { ServerUpgradeOffer } from "./server-upgrade-offer";
 import { useSidebar } from "./sidebar-context";
@@ -97,7 +94,7 @@ export function WorkspaceSidebar(props: { peopleEnabled: boolean }) {
   const { agentUnreadReplies, markAgentChatRead, markAgentChatUnread, markAllAgentMessagesRead } = useConversation();
   const { directPeople, teamPresence } = usePresence();
   const { activeDirectMember, activeDirectMemberId, directThreads } = useDirectMessages();
-  const { selectAgent, selectDirectMember, setGlobalSearchVisibility, chatHistory } = useNavigation();
+  const { selectAgent, selectDirectMember, setGlobalSearchVisibility } = useNavigation();
   const agentTasks = useAgentTasks();
   const agentThreads = useAgentThreads();
   const unreadAgentIds = createMemo(
@@ -109,20 +106,6 @@ export function WorkspaceSidebar(props: { peopleEnabled: boolean }) {
           if (selectAgent(agentId)) agentThreads.startNew(agentId);
         }
       : undefined;
-  const backTarget = (): { name: string } | null => {
-    const pageBack = chatHistory.pageBack();
-    if (pageBack) return { name: pageBack.name };
-    return chatName(chatHistory.chatUnderPage() ?? chatHistory.previous());
-  };
-  const chatName = (entry: ChatHistoryEntry | undefined): { name: string } | null => {
-    if (!entry) return null;
-    if (entry.kind === "agent") return { name: agentList().find((agent) => agent.id === entry.id)?.name ?? "" };
-    if (entry.kind === "channel") {
-      return { name: channels.state.channels.find((channel) => channel.id === entry.id)?.name ?? "" };
-    }
-    const member = directPeople().find((person) => person.id === entry.id);
-    return { name: member ? teamMemberName(member) : "" };
-  };
   const {
     sidebarLayout,
     collapsedSidebarSectionIds,
@@ -206,19 +189,12 @@ export function WorkspaceSidebar(props: { peopleEnabled: boolean }) {
           const server = activeServer();
           if (server) openServerSettings(server.id, trigger);
         }}
-        chatHistory={{
-          back: backTarget(),
-          forward: chatName(chatHistory.next()),
-          keys: chatHistoryKeys(platform.appInfo()?.platform === "darwin"),
-          onBack: chatHistory.goBack,
-          onForward: chatHistory.goForward,
-        }}
         serverUpdate={(() => {
           const server = activeServer();
           const badge = server ? serverUpdateBadge(server.id) : null;
           return server && badge ? { ...badge, onOpen: () => void showServerUpdate(server.id) } : undefined;
         })()}
-        topbarDetail={<DevWorktreeLabel />}
+        hideTopbarServer
         serverMenu={
           platform.appInfo()
             ? {
@@ -299,7 +275,6 @@ export function WorkspaceSidebar(props: { peopleEnabled: boolean }) {
         windowAgentIds={windowAgentIds()}
         compact={layout.leftPanelCompact()}
         onExpand={layout.expandSidebar}
-        onCollapse={() => layout.setSidebarClosed(true)}
         onOpenSearch={() => setGlobalSearchVisibility(true)}
         footer={
           <>

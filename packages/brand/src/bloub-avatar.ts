@@ -58,6 +58,7 @@ export const AVATAR_COLOR_PRESETS = {
   brown: "#8b5e3c",
   sand: "#d6b98c",
   grey: "#a3a3a3",
+  white: "#ffffff",
 } as const satisfies Record<string, AvatarColor>;
 export type AvatarColorPresetId = keyof typeof AVATAR_COLOR_PRESETS;
 
@@ -92,6 +93,7 @@ export const AVATAR_COLOR_CHOICES: readonly AvatarColorChoice[] = [
   presetChoice("brown"),
   presetChoice("sand"),
   presetChoice("grey"),
+  presetChoice("white"),
 ];
 
 export function isAvatarColorChoice(
@@ -107,6 +109,7 @@ export function bloubAvatarProfile(
   hue: AvatarHue | null,
   color: AvatarColor | null = null,
 ): BloubAvatarProfile {
+  seed = seed.replace(EYE_COLOR_SEED_SUFFIX, "");
   const storedSilhouette = requiredItem(SHAPES, stableIndex(`${seed}:shape`, SHAPES.length)).id;
   const silhouette =
     storedSilhouette === UNSUPPORTED_AVATAR_SILHOUETTE
@@ -187,8 +190,20 @@ const STYLE_SEED_SEGMENT: Readonly<Record<AvatarStyle, string>> = { plush: "face
 
 const FLAT_SEED_PATTERN = /:flat:\d+$/;
 
+// Keep the eye preference alongside the existing face seed without changing its hash.
+const EYE_COLOR_SEED_SUFFIX = /:eyes:(black|white)$/;
+
+export function avatarEyeColor(seed: string): "black" | "white" {
+  return seed.endsWith(":eyes:black") ? "black" : "white";
+}
+
+export function avatarSeedWithEyeColor(seed: string, color: "black" | "white"): string {
+  const base = seed.replace(EYE_COLOR_SEED_SUFFIX, "");
+  return color === "black" ? `${base}:eyes:black` : base;
+}
+
 export function avatarStyleForSeed(seed: string): AvatarStyle {
-  return FLAT_SEED_PATTERN.test(seed) ? "flat" : "plush";
+  return FLAT_SEED_PATTERN.test(seed.replace(EYE_COLOR_SEED_SUFFIX, "")) ? "flat" : "plush";
 }
 
 export function avatarDefaultSeed(agentId: string, style: AvatarStyle): string {

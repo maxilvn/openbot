@@ -8,6 +8,7 @@ import { useAmbientMotion } from "../../ambient-motion";
 import {
   AVATAR_EXPRESSIONS,
   type AvatarMotion,
+  avatarEyeColor,
   avatarStyleForSeed,
   bloubAvatarProfile,
   type SupportedAvatarSilhouetteId,
@@ -333,6 +334,7 @@ function GeneratedAvatar(props: {
       color={flatAppearance().color}
       expression={flatAppearance().expression}
       state={flatAppearance().state}
+      paper={avatarEyeColor(props.seed) === "black" ? "black" : undefined}
       paused={!animated()}
       fps={AVATAR_FPS}
       autoPause
@@ -375,6 +377,7 @@ function GeneratedAvatar(props: {
       class={`${props.class} agent-avatar-bloub`}
       style={spanStyle()}
       data-avatar="generated"
+      data-dark-eyes={avatarEyeColor(props.seed) === "black" ? "" : undefined}
       data-mood={props.mood}
       data-breathe={flatBreathe()}
       aria-hidden="true"
@@ -392,6 +395,7 @@ function GeneratedAvatar(props: {
                   expression={frozen.expression}
                   state={frozen.state}
                   frozenAt={POSES[frozen.state]}
+                  paper={avatarEyeColor(props.seed) === "black" ? "black" : undefined}
                   ariaLabel=""
                   class="bloub-avatar-svg"
                 />

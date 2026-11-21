@@ -107,6 +107,7 @@ export const messages = {
   "agent.color.violet": "Fioletowy",
   "agent.color.magenta": "Purpurowy",
   "agent.color.grey": "Szary",
+  "agent.color.white": "Biały",
   "agent.color.pink": "Różowy",
   "agent.color.sky": "Błękitny",
   "agent.color.navy": "Granatowy",

@@ -1,5 +1,5 @@
 import { BloubBot } from "@norbert_bodziony/bloub";
-import { bloubAvatarProfile } from "@openbot/brand/bloub-avatar";
+import { avatarEyeColor, bloubAvatarProfile } from "@openbot/brand/bloub-avatar";
 import type { AvatarColor, AvatarHue } from "@openbot/contracts/ipc";
 import { render } from "@solidjs/web";
 import { flush } from "solid-js";
@@ -13,10 +13,12 @@ export {
   type AvatarColorChoice,
   type AvatarStyle,
   avatarDefaultSeed,
+  avatarEyeColor,
   avatarHeadColor,
   avatarHueForColor,
   avatarHueSwatch,
   avatarSeedForFace,
+  avatarSeedWithEyeColor,
   avatarStyleForSeed,
   type BloubAvatarProfile,
   bloubAvatarProfile,
@@ -67,6 +69,7 @@ function mountStaticAvatar(
         shape={profile.shape}
         color={profile.color}
         expression={profile.expression}
+        paper={avatarEyeColor(seed) === "black" ? "black" : undefined}
         frozenAt={0}
         ariaLabel=""
       />

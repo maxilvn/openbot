@@ -896,10 +896,6 @@ textarea {
     padding-top: 11px;
   }
 
-  .app-frame-edge .sidebar-compact-search {
-    top: 11px;
-  }
-
   .app-frame-edge .conversation-panel,
   .app-frame-edge .direct-conversation {
     isolation: isolate;
@@ -1334,53 +1330,60 @@ textarea {
   padding: 8px 12px 6px;
 }
 
+/* Leave room for the native window buttons. */
+.app-frame-platform-darwin:not(.web-app-frame) .sidebar:not(.sidebar-compact) {
+  position: relative;
+}
+
+@container (min-width: 190px) {
+  .app-frame-platform-darwin:not(.web-app-frame) .sidebar:not(.sidebar-compact) .sidebar-topbar {
+    justify-content: flex-end;
+  }
+
+  .app-frame-platform-darwin:not(.web-app-frame) .sidebar:not(.sidebar-compact) .sidebar-search-wrap {
+    position: absolute;
+    z-index: 3;
+    inset-block-start: 0;
+    inset-inline-start: 112px;
+    height: var(--left-header-height);
+    gap: 0;
+    padding: 0;
+  }
+}
+
 .sidebar-search-trigger {
-  min-width: 0;
-  flex: 1 1 auto;
-  justify-content: flex-start;
-  font-size: var(--openbot-text-md);
-  font-weight: var(--openbot-weight-regular);
-  line-height: 18px;
+  width: 28px;
+  height: 28px;
+  flex: 0 0 28px;
   cursor: pointer;
 }
 
-.sidebar-search-trigger:hover:not(:disabled) {
-  border-color: var(--openbot-text-dim);
-  background: var(--openbot-bg-surface);
-  color: var(--openbot-text-dim);
-}
-
-.sidebar-search-placeholder {
-  color: var(--openbot-text-muted);
-}
-
-.sidebar-compact-search {
+.sidebar-compact .sidebar-search-trigger {
   position: absolute;
   inset: 8px 12px 6px;
+  z-index: 3;
   display: grid;
   height: 32px;
+  width: auto;
+  flex: none;
   place-items: center;
   border: 0;
   border-radius: var(--openbot-radius-sm);
   background: transparent;
   color: var(--openbot-text-muted);
-  opacity: 0;
-  pointer-events: none;
-  transform: translateX(6px) scale(0.96);
   cursor: pointer;
   transition:
     background-color var(--openbot-duration-hover) ease,
     color var(--openbot-duration-hover) ease,
-    opacity var(--openbot-duration-fast) ease,
     transform var(--openbot-duration-slow) cubic-bezier(0.32, 0.72, 0, 1);
 }
 
-.sidebar-compact-search:hover {
+.sidebar-compact .sidebar-search-trigger:hover {
   background: var(--openbot-hover);
   color: var(--openbot-text-primary);
 }
 
-.sidebar-compact-search:active {
+.sidebar-compact .sidebar-search-trigger:active {
   transform: scale(0.96);
 }
 
@@ -2057,7 +2060,8 @@ textarea {
 }
 
 .sidebar-pinned-group {
-  padding: 4px 0 2px;
+  border-bottom: 1px solid var(--openbot-border);
+  padding: 4px 0 6px;
 }
 
 .sidebar-pinned-list {
@@ -2447,6 +2451,11 @@ textarea {
   overflow: visible;
   translate: var(--agent-avatar-optical-offset-x, 0) var(--agent-avatar-optical-offset, 0);
   pointer-events: none;
+}
+
+/* Plush eye textures sit in nested SVGs; the body image is a separate layer. */
+[data-dark-eyes] .bloub-avatar-svg svg[preserveAspectRatio="none"] > image[width="1"][height="1"] {
+  filter: brightness(0);
 }
 
 .bloub-avatar-svg > g:nth-of-type(2) > path:first-child {
@@ -2876,7 +2885,7 @@ textarea {
   min-width: 0;
   overflow: hidden;
   color: var(--openbot-text-primary);
-  font-size: var(--openbot-text-lg);
+  font-size: var(--openbot-text-md);
   line-height: 20px;
   font-weight: 500;
   text-overflow: ellipsis;
@@ -2951,7 +2960,7 @@ textarea {
   margin-top: 0;
   overflow: hidden;
   color: var(--openbot-text-muted);
-  font-size: var(--openbot-text-md);
+  font-size: var(--openbot-text-sm);
   line-height: 18px;
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -3273,7 +3282,15 @@ textarea {
 }
 
 .sidebar-compact .sidebar-toggle-button {
+  opacity: 0;
+  pointer-events: none;
   transform: translateX(13px);
+  transition: opacity var(--openbot-duration-fast) ease;
+}
+
+.sidebar-compact .sidebar-topbar:is(:hover, :focus-within) .sidebar-toggle-button {
+  opacity: 1;
+  pointer-events: auto;
 }
 
 .sidebar-compact .sidebar-toggle-button:active {
@@ -3281,20 +3298,7 @@ textarea {
 }
 
 .sidebar-compact .sidebar-search-wrap {
-  padding-inline: 12px;
-}
-
-.sidebar-compact .search-field {
-  opacity: 0;
-  pointer-events: none;
-  transform: translateX(-8px);
-}
-
-.sidebar-compact .sidebar-compact-search {
-  opacity: 1;
-  pointer-events: auto;
-  transform: translateX(0) scale(1);
-  transition-delay: 55ms;
+  display: none;
 }
 
 .sidebar-compact .agent-list {
@@ -3365,10 +3369,6 @@ textarea {
 
 .sidebar-compact .sidebar-toggle-button:dir(rtl):active {
   transform: translateX(-13px) scale(0.96);
-}
-
-.sidebar-compact .search-field:dir(rtl) {
-  transform: translateX(8px);
 }
 
 .sidebar-compact .agent-row-avatar:dir(rtl) {

@@ -76,8 +76,10 @@ import {
   type AvatarColorChoice,
   type AvatarStyle,
   avatarDefaultSeed,
+  avatarEyeColor,
   avatarHueForColor,
   avatarSeedForFace,
+  avatarSeedWithEyeColor,
   avatarStyleForSeed,
   bloubAvatarProfile,
   isAvatarColorChoice,
@@ -741,7 +743,7 @@ export default function AgentSettingsPanel(props: AgentSettingsPanelProps) {
       style === "plush" && own.shape === face.shape && own.expression === face.expression
         ? props.agent.id
         : avatarSeedForFace(props.agent.id, face, style);
-    await selectGeneratedAvatar(seed, current.color);
+    await selectGeneratedAvatar(avatarSeedWithEyeColor(seed, avatarEyeColor(draft.avatar.seed)), current.color);
   }
 
   async function selectModel(
@@ -1198,6 +1200,37 @@ export default function AgentSettingsPanel(props: AgentSettingsPanelProps) {
                               expression={expression}
                               transition="cut"
                             />
+                          </Button>
+                        )}
+                      </For>
+                    </fieldset>
+                    <div class="avatar-editor-divider" />
+                    <div class="avatar-editor-heading">
+                      <span>{t("agentSettings.avatar.eyeColor")}</span>
+                    </div>
+                    <fieldset class="avatar-color-grid" aria-label={t("agentSettings.avatar.eyeColor")}>
+                      <For each={["white", "black"] as const}>
+                        {(color) => (
+                          <Button
+                            variant="ghost"
+                            type="button"
+                            class={[
+                              "avatar-color-choice",
+                              { "avatar-choice-selected": avatarEyeColor(draft.avatar.seed) === color },
+                            ]}
+                            aria-label={t(
+                              color === "black" ? "agentSettings.avatar.blackEyes" : "agentSettings.avatar.whiteEyes",
+                            )}
+                            aria-pressed={avatarEyeColor(draft.avatar.seed) === color ? "true" : "false"}
+                            onClick={() => {
+                              if (!avatarUrl() && avatarEyeColor(draft.avatar.seed) === color) return;
+                              void selectGeneratedAvatar(
+                                avatarSeedWithEyeColor(draft.avatar.seed, color),
+                                avatarFace().color,
+                              );
+                            }}
+                          >
+                            <span class="avatar-color-swatch" style={{ "background-color": color }} />
                           </Button>
                         )}
                       </For>
